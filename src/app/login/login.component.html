@@ -1,0 +1,8 @@
+<div>
+  <h1>Login</h1>
+  <form [formGroup]="loginForm" novalidate>
+    <input formControlName="username" type="text" name="username" placeholder="Username" />
+    <input formControlName="password" type="password" name="password" placeholder="Password" />
+    <button (click)="login(loginForm.value)">Login</button>
+  </form>
+</div>

@@ -1,10 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
+import { AppErrorHandler } from './error-handler.service';
+
+import { CoreModule } from './core';
+import { ErrorModule } from './error';
+import { HomeModule } from './home';
+import { LoginModule } from './login';
 
 import { environment } from '../environments/environment';
 
@@ -15,9 +20,15 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    CoreModule.forRoot(),
+    ErrorModule,
+    HomeModule,
+    LoginModule
   ],
-  providers: [],
+  providers: [{
+    provide: ErrorHandler,
+    useClass: AppErrorHandler
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
